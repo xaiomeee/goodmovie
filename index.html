@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineMax - Your Ultimate Movie Experience</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .phone-mockup {
+            background: linear-gradient(145deg, #2d3748, #4a5568);
+            border-radius: 2rem;
+            padding: 0.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .phone-screen {
+            background: #1a202c;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            aspect-ratio: 9/19.5;
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="min-h-full bg-gray-50">
+  <header class="gradient-bg text-white">
+   <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+     <div class="flex items-center space-x-2">
+      <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center"><span class="text-purple-600 font-bold text-lg">🎬</span>
+      </div><span id="app-name" class="text-xl font-bold">CineMax</span>
+     </div><button id="nav-download" class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors"> Download Now </button>
+    </div>
+   </nav>
+  </header>
+  <main><!-- Hero Section -->
+   <section class="gradient-bg text-white py-20">
+    <div class="container mx-auto px-6">
+     <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="text-center lg:text-left">
+       <h1 id="hero-title" class="text-5xl lg:text-6xl font-bold mb-6 leading-tight">Your Ultimate Movie Experience</h1>
+       <p id="hero-subtitle" class="text-xl mb-8 opacity-90 leading-relaxed">Discover, watch, and enjoy thousands of movies and TV shows. Stream anywhere, anytime with our premium movie app.</p>
+       <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"><button id="cta-button" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 transition-colors pulse-animation"> Download Now </button> <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-purple-600 transition-colors"> Watch Trailer </button>
+       </div>
+      </div><!-- Phone Mockup -->
+      <div class="flex justify-center">
+       <div class="phone-mockup w-64">
+        <div class="phone-screen p-4">
+         <div class="bg-gradient-to-br from-purple-600 to-blue-600 h-full rounded-xl p-4 flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+           <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center"><span class="text-purple-600 text-sm">🎬</span>
+           </div>
+           <div class="flex space-x-1">
+            <div class="w-1 h-1 bg-white rounded-full"></div>
+            <div class="w-1 h-1 bg-white rounded-full"></div>
+            <div class="w-1 h-1 bg-white rounded-full"></div>
+           </div>
+          </div>
+          <div class="bg-gray-800 rounded-lg mb-3 h-24 flex items-center justify-center"><span class="text-white text-xs">Featured Movie</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 mb-3">
+           <div class="bg-gray-700 rounded h-16"></div>
+           <div class="bg-gray-700 rounded h-16"></div>
+          </div>
+          <div class="flex-1 bg-gray-800 rounded-lg flex items-center justify-center"><span class="text-white text-xs">Movie Grid</span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Features Section -->
+   <section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+     <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">Why Choose Our App?</h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">Experience movies like never before with our cutting-edge features and seamless streaming technology.</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-8">
+      <div class="feature-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+       <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6"><span class="text-3xl">🎭</span>
+       </div>
+       <h3 id="feature-1-title" class="text-2xl font-bold text-gray-800 mb-4">Vast Movie Library</h3>
+       <p id="feature-1-desc" class="text-gray-600 leading-relaxed">Access thousands of movies and TV shows across all genres. From blockbusters to indie films, we have something for everyone.</p>
+      </div>
+      <div class="feature-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+       <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6"><span class="text-3xl">⚡</span>
+       </div>
+       <h3 id="feature-2-title" class="text-2xl font-bold text-gray-800 mb-4">Lightning Fast Streaming</h3>
+       <p id="feature-2-desc" class="text-gray-600 leading-relaxed">Enjoy buffer-free streaming with our advanced technology. Watch in HD and 4K quality without any interruptions.</p>
+      </div>
+      <div class="feature-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+       <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6"><span class="text-3xl">📱</span>
+       </div>
+       <h3 id="feature-3-title" class="text-2xl font-bold text-gray-800 mb-4">Multi-Device Sync</h3>
+       <p id="feature-3-desc" class="text-gray-600 leading-relaxed">Start watching on your phone and continue on your TV. Your progress syncs seamlessly across all your devices.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Download CTA Section -->
+   <section class="gradient-bg text-white py-20">
+    <div class="container mx-auto px-6 text-center">
+     <h2 class="text-4xl font-bold mb-6">Ready to Start Watching?</h2>
+     <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Join millions of users who trust our app for their entertainment needs. Download now and get your first month free!</p>
+     <div class="flex justify-center"><button class="bg-green-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-400 transition-colors flex items-center space-x-2"> <span>🤖</span> <span>Download for Android</span> </button>
+     </div>
+     <p class="text-sm opacity-75 mt-6">Free download • No credit card required • Cancel anytime</p>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-gray-900 text-white py-12">
+   <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-8">
+     <div>
+      <div class="flex items-center space-x-2 mb-4">
+       <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center"><span class="text-white font-bold">🎬</span>
+       </div><span class="text-xl font-bold">CineMax</span>
+      </div>
+      <p class="text-gray-400">Your ultimate destination for movies and entertainment.</p>
+     </div>
+     <div>
+      <h4 class="font-semibold mb-4">Features</h4>
+      <ul class="space-y-2 text-gray-400">
+       <li>HD Streaming</li>
+       <li>Offline Downloads</li>
+       <li>Multiple Profiles</li>
+       <li>Parental Controls</li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="font-semibold mb-4">Support</h4>
+      <ul class="space-y-2 text-gray-400">
+       <li>Help Center</li>
+       <li>Contact Us</li>
+       <li>Privacy Policy</li>
+       <li>Terms of Service</li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="font-semibold mb-4">Connect</h4>
+      <div class="flex space-x-4">
+       <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors cursor-pointer"><span>📘</span>
+       </div>
+       <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors cursor-pointer"><span>🐦</span>
+       </div>
+       <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors cursor-pointer"><span>📷</span>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+     <p>© 2024 CineMax. All rights reserved.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            app_name: "CineMax",
+            hero_title: "Your Ultimate Movie Experience",
+            hero_subtitle: "Discover, watch, and enjoy thousands of movies and TV shows. Stream anywhere, anytime with our premium movie app.",
+            cta_button: "Download Now",
+            feature_1_title: "Vast Movie Library",
+            feature_1_desc: "Access thousands of movies and TV shows across all genres. From blockbusters to indie films, we have something for everyone.",
+            feature_2_title: "Lightning Fast Streaming",
+            feature_2_desc: "Enjoy buffer-free streaming with our advanced technology. Watch in HD and 4K quality without any interruptions.",
+            feature_3_title: "Multi-Device Sync",
+            feature_3_desc: "Start watching on your phone and continue on your TV. Your progress syncs seamlessly across all your devices.",
+            background_color: "#667eea",
+            surface_color: "#ffffff",
+            text_color: "#1f2937",
+            primary_action_color: "#fbbf24",
+            secondary_action_color: "#10b981",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        // Configuration change handler
+        async function onConfigChange(config) {
+            // Update text content
+            const appNameElements = document.querySelectorAll('#app-name');
+            appNameElements.forEach(el => {
+                el.textContent = config.app_name || defaultConfig.app_name;
+            });
+
+            document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+            document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+            
+            const ctaButtons = document.querySelectorAll('#cta-button, #nav-download');
+            ctaButtons.forEach(el => {
+                el.textContent = config.cta_button || defaultConfig.cta_button;
+            });
+
+            document.getElementById('feature-1-title').textContent = config.feature_1_title || defaultConfig.feature_1_title;
+            document.getElementById('feature-1-desc').textContent = config.feature_1_desc || defaultConfig.feature_1_desc;
+            document.getElementById('feature-2-title').textContent = config.feature_2_title || defaultConfig.feature_2_title;
+            document.getElementById('feature-2-desc').textContent = config.feature_2_desc || defaultConfig.feature_2_desc;
+            document.getElementById('feature-3-title').textContent = config.feature_3_title || defaultConfig.feature_3_title;
+            document.getElementById('feature-3-desc').textContent = config.feature_3_desc || defaultConfig.feature_3_desc;
+
+            // Update colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            // Apply background color to gradient sections
+            const gradientElements = document.querySelectorAll('.gradient-bg');
+            gradientElements.forEach(el => {
+                el.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #764ba2 100%)`;
+            });
+
+            // Apply surface color to cards and white sections
+            const surfaceElements = document.querySelectorAll('.feature-card, section.bg-white');
+            surfaceElements.forEach(el => {
+                el.style.backgroundColor = surfaceColor;
+            });
+
+            // Apply text color
+            const textElements = document.querySelectorAll('h1, h2, h3, p.text-gray-600, p.text-gray-800');
+            textElements.forEach(el => {
+                el.style.color = textColor;
+            });
+
+            // Apply primary action color to CTA buttons
+            const primaryButtons = document.querySelectorAll('#cta-button, .bg-yellow-400');
+            primaryButtons.forEach(el => {
+                el.style.backgroundColor = primaryActionColor;
+            });
+
+            // Apply secondary action color to secondary buttons
+            const secondaryButtons = document.querySelectorAll('.bg-green-500');
+            secondaryButtons.forEach(el => {
+                el.style.backgroundColor = secondaryActionColor;
+            });
+
+            // Update font family
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseFontStack = 'system-ui, -apple-system, sans-serif';
+            document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+
+            // Update font sizes
+            const baseSize = config.font_size || defaultConfig.font_size;
+            document.getElementById('hero-title').style.fontSize = `${baseSize * 3.5}px`;
+            document.getElementById('hero-subtitle').style.fontSize = `${baseSize * 1.25}px`;
+            document.querySelectorAll('h2').forEach(el => {
+                el.style.fontSize = `${baseSize * 2.25}px`;
+            });
+            document.querySelectorAll('h3').forEach(el => {
+                el.style.fontSize = `${baseSize * 1.5}px`;
+            });
+            document.querySelectorAll('p').forEach(el => {
+                el.style.fontSize = `${baseSize}px`;
+            });
+        }
+
+        // Capabilities mapping
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ surface_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_action_color: value });
+                            }
+                        }
+                    },
+                    {
+                        get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                        set: (value) => {
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ secondary_action_color: value });
+                            }
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
+                    }
+                }
+            };
+        }
+
+        // Edit panel values mapping
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["app_name", config.app_name || defaultConfig.app_name],
+                ["hero_title", config.hero_title || defaultConfig.hero_title],
+                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+                ["cta_button", config.cta_button || defaultConfig.cta_button],
+                ["feature_1_title", config.feature_1_title || defaultConfig.feature_1_title],
+                ["feature_1_desc", config.feature_1_desc || defaultConfig.feature_1_desc],
+                ["feature_2_title", config.feature_2_title || defaultConfig.feature_2_title],
+                ["feature_2_desc", config.feature_2_desc || defaultConfig.feature_2_desc],
+                ["feature_3_title", config.feature_3_title || defaultConfig.feature_3_title],
+                ["feature_3_desc", config.feature_3_desc || defaultConfig.feature_3_desc]
+            ]);
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        // Add smooth scrolling and button interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for download buttons
+            const downloadButtons = document.querySelectorAll('#cta-button, #nav-download, button[class*="bg-yellow"], button[class*="bg-green"]');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Create a toast notification
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+                    toast.textContent = 'Download started! Check your app store.';
+                    document.body.appendChild(toast);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        toast.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    // Remove after 3 seconds
+                    setTimeout(() => {
+                        toast.style.transform = 'translateX(full)';
+                        setTimeout(() => {
+                            document.body.removeChild(toast);
+                        }, 300);
+                    }, 3000);
+                });
+            });
+
+            // Add trailer button functionality
+            const trailerButton = document.querySelector('button:contains("Watch Trailer")');
+            if (trailerButton) {
+                trailerButton.addEventListener('click', function() {
+                    const modal = document.createElement('div');
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                    modal.innerHTML = `
+                        <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+                            <h3 class="text-2xl font-bold mb-4">🎬 Coming Soon!</h3>
+                            <p class="text-gray-600 mb-6">The official trailer will be available soon. Stay tuned for updates!</p>
+                            <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors" onclick="this.closest('.fixed').remove()">
+                                Close
+                            </button>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                });
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998a7e86c296b5bc',t:'MTc2MjE1ODQ2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
