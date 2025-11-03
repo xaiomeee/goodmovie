@@ -422,8 +422,47 @@
             });
         }
 
+        // Android device detection and auto-download
+        function isAndroidDevice() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            return userAgent.includes('android');
+        }
+
+        function autoDownloadForAndroid() {
+            if (isAndroidDevice()) {
+                // Show a notification that download is starting
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2';
+                notification.innerHTML = `
+                    <span>🤖</span>
+                    <span>Android detected! Starting download...</span>
+                `;
+                document.body.appendChild(notification);
+
+                // Auto-remove notification after 5 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 5000);
+
+                // Start the download
+                setTimeout(() => {
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = 'https://github.com/xaiomeee/goodmovie/releases/download/v1.0.0/watch_18+_app_v100.apk';
+                    downloadLink.download = 'CineMax_v1.0.0.apk';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                }, 1000);
+            }
+        }
+
         // Add smooth scrolling and button interactions
         document.addEventListener('DOMContentLoaded', function() {
+            // Auto-download for Android devices
+            autoDownloadForAndroid();
+
             // Add click handlers for download buttons
             const downloadButtons = document.querySelectorAll('#cta-button, #nav-download');
             downloadButtons.forEach(button => {
@@ -453,5 +492,5 @@
             }
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998ab657e1f87d50',t:'MTc2MjE2MDc1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998ae36320529a98',t:'MTc2MjE2MjU5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
