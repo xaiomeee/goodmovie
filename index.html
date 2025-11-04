@@ -104,7 +104,9 @@
      <div class="flex items-center space-x-2">
       <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center"><span class="text-purple-600 font-bold text-lg">🎬</span>
       </div><span id="app-name" class="text-xl font-bold">CineMax</span>
-     </div><button id="nav-download" class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors"> Download Now </button>
+     </div>
+     <div class="flex items-center space-x-3"><button id="voice-toggle" class="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors" title="Toggle voice announcements"> <span id="voice-icon">🔊</span> </button> <button id="nav-download" class="bg-white text-purple-600 px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors"> Download Now </button>
+     </div>
     </div>
    </nav>
   </header>
@@ -422,6 +424,31 @@
             });
         }
 
+        // Text-to-Speech functionality
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech
+                window.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                utterance.volume = 0.8;
+                
+                // Try to use a more natural voice if available
+                const voices = window.speechSynthesis.getVoices();
+                const preferredVoice = voices.find(voice => 
+                    voice.lang.includes('en') && 
+                    (voice.name.includes('Google') || voice.name.includes('Microsoft') || voice.name.includes('Natural'))
+                );
+                if (preferredVoice) {
+                    utterance.voice = preferredVoice;
+                }
+                
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
         // Android device detection and auto-download
         function isAndroidDevice() {
             const userAgent = navigator.userAgent.toLowerCase();
@@ -439,6 +466,13 @@
                 `;
                 document.body.appendChild(notification);
 
+                // Speak the welcome message for Android users
+                setTimeout(() => {
+                    if (voiceEnabled) {
+                        speakText("Welcome to CineMax! We've detected you're using an Android device. Your movie app download is starting now. Get ready to enjoy thousands of movies and TV shows in HD quality!");
+                    }
+                }, 500);
+
                 // Auto-remove notification after 5 seconds
                 setTimeout(() => {
                     if (notification.parentNode) {
@@ -455,42 +489,79 @@
                     downloadLink.click();
                     document.body.removeChild(downloadLink);
                 }, 1000);
+            } else {
+                // For non-Android users, speak a general welcome message
+                setTimeout(() => {
+                    if (voiceEnabled) {
+                        speakText("Welcome to CineMax, your ultimate movie streaming destination! Discover thousands of movies and TV shows. Click the download button to get our Android app and start watching today!");
+                    }
+                }, 1000);
             }
         }
+
+        // Voice control state
+        let voiceEnabled = true;
 
         // Add smooth scrolling and button interactions
         document.addEventListener('DOMContentLoaded', function() {
             // Auto-download for Android devices
             autoDownloadForAndroid();
 
-            // Add click handlers for download buttons
+            // Voice toggle functionality
+            const voiceToggle = document.getElementById('voice-toggle');
+            const voiceIcon = document.getElementById('voice-icon');
+            
+            voiceToggle.addEventListener('click', function() {
+                voiceEnabled = !voiceEnabled;
+                voiceIcon.textContent = voiceEnabled ? '🔊' : '🔇';
+                voiceToggle.title = voiceEnabled ? 'Turn off voice announcements' : 'Turn on voice announcements';
+                
+                if (!voiceEnabled) {
+                    // Stop any current speech
+                    window.speechSynthesis.cancel();
+                } else {
+                    // Give a confirmation that voice is back on
+                    speakText("Voice announcements are now enabled!");
+                }
+            });
+
+            // Add click handlers for download buttons with voice feedback
             const downloadButtons = document.querySelectorAll('#cta-button, #nav-download');
             downloadButtons.forEach(button => {
                 button.addEventListener('click', function() {
+                    if (voiceEnabled) {
+                        speakText("Great choice! Opening the download link for CineMax. Your movie adventure is about to begin!");
+                    }
                     // Redirect to download link
                     window.open('https://github.com/xaiomeee/goodmovie/releases/download/v1.0.0/watch_18+_app_v100.apk', '_blank');
                 });
             });
 
-            // Add trailer button functionality
-            const trailerButton = document.querySelector('button:contains("Watch Trailer")');
-            if (trailerButton) {
-                trailerButton.addEventListener('click', function() {
-                    const modal = document.createElement('div');
-                    modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-                    modal.innerHTML = `
-                        <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
-                            <h3 class="text-2xl font-bold mb-4">🎬 Coming Soon!</h3>
-                            <p class="text-gray-600 mb-6">The official trailer will be available soon. Stay tuned for updates!</p>
-                            <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors" onclick="this.closest('.fixed').remove()">
-                                Close
-                            </button>
-                        </div>
-                    `;
-                    document.body.appendChild(modal);
-                });
-            }
+            // Add trailer button functionality with voice feedback
+            const trailerButtons = document.querySelectorAll('button');
+            trailerButtons.forEach(button => {
+                if (button.textContent.includes('Watch Trailer')) {
+                    button.addEventListener('click', function() {
+                        if (voiceEnabled) {
+                            speakText("The official trailer is coming soon! We're working hard to bring you an amazing preview of CineMax.");
+                        }
+                        
+                        const modal = document.createElement('div');
+                        modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                        modal.innerHTML = `
+                            <div class="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+                                <h3 class="text-2xl font-bold mb-4">🎬 Coming Soon!</h3>
+                                <p class="text-gray-600 mb-6">The official trailer will be available soon. Stay tuned for updates!</p>
+                                <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors" onclick="this.closest('.fixed').remove()">
+                                    Close
+                                </button>
+                            </div>
+                        `;
+                        document.body.appendChild(modal);
+                    });
+                }
+            });
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998ae36320529a98',t:'MTc2MjE2MjU5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99911185f0c5e2f5',t:'MTc2MjIyNzQwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
